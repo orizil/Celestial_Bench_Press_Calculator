@@ -7,12 +7,16 @@ from planetary_data import *
 class CelestialBenchPressCalculator:
     def __init__(self, root):
         self.root = root
+
+        # Initialize a variable to track the selected planet
         self.selected_planet = tk.StringVar()
         self.selected_planet.set("earth")
 
+        # Create the left panel to hold planet selection buttons
         self.left_panel = ctk.CTkFrame(self.root)
         self.left_panel.grid(row=0, column=0, padx=5, pady=5)
 
+        # Create the right panel to hold input and result elements
         self.right_panel = ctk.CTkFrame(self.root)
         self.right_panel.grid(row=0, column=1, padx=5, pady=5)
 
@@ -24,6 +28,8 @@ class CelestialBenchPressCalculator:
         self.create_result_label()
         self.create_info_label()
         self.create_slider_and_entry()
+
+        # Update the slider based on entry value changes
         self.weight.trace_add("write", self.update_slider_from_entry)
 
     def create_planet_buttons(self):
@@ -34,6 +40,7 @@ class CelestialBenchPressCalculator:
             button_row = button_index // 2
             button_column = button_index % 2
 
+            # Create a button for each planet
             planet_button = ctk.CTkButton(self.left_panel, image=image, text=name.capitalize(),
                                           fg_color="transparent", command=lambda planet=name: self.button_click(planet))
             planet_button.grid(row=button_row, column=button_column, pady=5)
